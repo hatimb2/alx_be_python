@@ -13,4 +13,4 @@ def calculate_future_date(current_date):
         print("Invalid input. Please enter an integer.")
 if __name__ == "__main__":
     current = display_current_datetime()
-    calculate_future_date(current).
+    calculate_future_date(current)
