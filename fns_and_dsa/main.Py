@@ -1,13 +1,28 @@
-from arithmetic_operations import perform_operation
+import sys
+from bank_account import BankAccount
 
 def main():
-    print("Arithmetic Operations")
-    num1 = float(input("Enter the first number: "))
-    num2 = float(input("Enter the second number: "))
-    operation = input("Enter the operation (add, subtract, multiply, divide): ").strip().lower()
+    account = BankAccount(100)  # Example starting balance
+    if len(sys.argv) < 2:
+        print("Usage: python main.py <command>:<amount>")
+        print("Commands: deposit, withdraw, display")
+        sys.exit(1)
 
-    result = perform_operation(num1, num2, operation)
-    print(f"Result: {result}")
+    command, *params = sys.argv[1].split(':')
+    amount = float(params[0]) if params else None
+
+    if command == "deposit" and amount is not None:
+        account.deposit(amount)
+        print(f"Deposited: ${amount}")
+    elif command == "withdraw" and amount is not None:
+        if account.withdraw(amount):
+            print(f"Withdrew: ${amount}")
+        else:
+            print("Insufficient funds.")
+    elif command == "display":
+        account.display_balance()
+    else:
+        print("Invalid command.")
 
 if __name__ == "__main__":
     main()
